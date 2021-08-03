@@ -1,0 +1,33 @@
+Parameters:
+  SubscriptionEndPoint:
+    Type: String
+    Description: The endpoint that receives notifications.
+    AllowedValues:
+    - rameshtippana107@gmail.com
+    Default: rameshtippana107@gmail.com
+  SubscriptionProtocol:
+    Type: String
+    Description: The subscription protocol
+    AllowedValues:
+    - http
+    - https
+    - email
+    - email-json
+    - sms
+    - sqs
+    - application
+    - lambda
+    Default: email
+Resources:
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties: {}
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint:
+        Ref: SubscriptionEndPoint
+      Protocol:
+        Ref: SubscriptionProtocol
+      TopicArn:
+        Ref: SNSTopic
